@@ -6,15 +6,16 @@ tags:
   - Ontologies
   - Workflows
 authors:
-  - name: First Author
+  - name: Miguel Mazumder
     affiliation: 1
-    role: Writing – original draft
+    orcid: 0000-0003-1181-8118
+    role: Conceptualization, Methodology, Software, Validation, Data curation, Writing – original draft
   - name: Last Author
     orcid: 0000-0000-0000-0000
     affiliation: 2
     role: Conceptualization, Writing – review & editing
 affiliations:
-  - name: First Affiliation
+  - name: Glycan and Life Systems Integration Center (GaLSIC), Soka University, Tokyo, Japan
     index: 1
   - name: ELIXIR Europe
     ror: 044rwnt51
