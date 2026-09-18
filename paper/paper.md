@@ -43,7 +43,7 @@ LLMs can navigate complexity in a highly organized and complex triple system qui
 
 
 INSERT STUFF ABOUT HOW THIS LEADS INTO ENGINE DEVELOPMENT AND DATA WAREHOUSE MANAGEMENT HOUSEKEEPING
-
+<!--
 ## Meeting information
 
 If you want to submit a preprint to BioHackrXiv, first check if your meeting is registered. You can find a list
@@ -245,6 +245,8 @@ Possible CiTO typing annotation include:
 * updates
 
 There is a general `cites` intention, but this is already implied and should be left out.
+-->
+
 # Abstract
 The Human Glycome Atlas Project aims to integrate human glycoscience data into a linked RDF resource connecting glycans and glycoconjugates with their biological context. Constructing such a resource from existing knowledge bases requires reproducible identification and extraction of human-relevant data, preservation of semantic behavior when the resulting RDF is served through different graph engines, and appropriate control over access to protected data. During DBCLS BioHackathon 2026, we developed an agent-assisted, human-validated workflow for exploring complex RDF schemas and generating SPARQL CONSTRUCT extraction queries. We further developed a cross-engine conformance framework for evaluating RDF serving behavior and advanced the AAII authorization architecture used to mediate access to TOHSA data. Together, these activities connect source-data discovery, reproducible extraction, semantic serving, and governed access into a common workflow for constructing and operating the TOHSA knowledge base.
 
