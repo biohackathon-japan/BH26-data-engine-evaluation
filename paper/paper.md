@@ -276,9 +276,15 @@ Below is a summarized example of the conclusions from an agent-assisted explorat
 | Glycolipids | None exists, confirmed by exhaustive live checking | 6046 (full population, no species filter possible) of 6280 store wide | No species predicate anywhere in the dataset; the scope decision to cover the full population was made without a response from the person directing the work, and is flagged for confirmation |
 
 ## CONSTRUCT Query Drafting
-Once the subject matter confirms that the agent has an accurate representation of the data structure and how the target data fits into that structure, the agent begins to draft construct queries. Those queries 
+Once the subject matter confirms that the agent has an accurate representation of the data structure and how the target data fits into that structure, the agent begins to draft construct queries. Those queries are crafted by……
 
-The user evaluates the query for a) appropriate scope b) time-out risk c)
+INSERT INFORMATION FROM AGENT
+
+The user evaluates the query for a) appropriate scope b) time-out risk and c) extraction coverage completeness. Despite being more computationally intensive than SELECT files, CONSTRUCT queries do not require an additional step of triple reconstruction across tables, and ensure fidelity between target triples and the extracted triples. All drafted CONSTRUCT queries are documented before being run against the endpoint, allowing for a subject matter expert to run the query with `LIMIT` conditions and evaluate the output. 
+
+FUTURE CAPABILTIES 
+The documentation created by this workflow is prose heavy and could be simplified into a more structured format that is still human readable, but easier for other agents to engage with. Standard RDF-config files in .yaml format are already commonly used to document RDF schema, and could serve as an appropriate addition to the prose. The simplified and structured .yaml files could facilitate new ways to extend the workflow beyond extraction as we continue development. 
+
 
 # Ontological Data Investigation Nexus (ODIN)
 
