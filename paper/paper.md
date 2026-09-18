@@ -15,6 +15,10 @@ authors:
     affiliation: 1
     orcid: 0000-0003-1181-8118
     role: Conceptualization, Methodology, Software, Validation, Data curation, Writing – original draft
+  - name: Rajat Kumar Mondal
+    affiliation: 1
+    orcid: 0000-0003-1181-8118
+    role: Conceptualization, Methodology, Software, Writing
   - name: Last Author
     orcid: 0000-0000-0000-0000
     affiliation: 2
