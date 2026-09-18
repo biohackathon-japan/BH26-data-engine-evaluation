@@ -19,9 +19,9 @@ authors:
     affiliation: 1
     orcid: 0000-0003-1181-8118
     role: Conceptualization, Methodology, Software, Writing
-  - name: Last Author
+  - name: Ashanti Robinson
     orcid: 0000-0000-0000-0000
-    affiliation: 2
+    affiliation: 1
     role: Conceptualization, Writing – review & editing
 affiliations:
   - name: Glycan and Life Systems Integration Center (GaLSIC), Soka University, Tokyo, Japan
@@ -373,6 +373,55 @@ Together, these steps extend the extraction workflow into the serving side of TO
 
 # Ontological Data Investigation Nexus (ODIN)
 
+# Introduction
+
+ODIN is a workbench for writing, running, and comparing SPARQL queries as a team, built for researchers who work against public knowledge graphs they do not control. It descended from a SPARQL editor first built inside PDDEIMS, a system created to decide which parts of the GlyCosmos knowledge graph deserve extraction. Beyond running queries, ODIN keeps a shared log of every query any team member runs, open to threaded comments, labels, and personal bookmarks. This turns what most tools treat as a private activity into a record the whole team can return to. It also asks each connected endpoint directly what classes and predicates it contains, since no external registry reliably answers that question, and builds runnable example queries from whatever it finds. A review of published SPARQL tools, together with YummyData, a service that scores the trustworthiness of biomedical endpoints, situates ODIN among close relatives that each solve one part of this problem but not the combination. This paper describes ODIN's design, positions it against that related work, and states plainly what it does not attempt to solve.
+
+Public knowledge graphs published through SPARQL endpoints are rarely self documenting. A researcher who wants to know what classes or predicates an endpoint actually uses cannot usually consult a registry. General purpose registries either do not exist, or they fall out of date faster than the graphs they describe. Existing SPARQL editors solve the mechanics of writing and running a query well, syntax highlighting, autocomplete, result formatting. Most still keep a person's query history private to that person, even when several colleagues are investigating the same endpoint at the same time.
+
+ODIN was built inside a team already facing this problem directly, querying GlyCosmos and a mirror of GlyCosmos. The goal was to decide which parts of that graph were relevant to a downstream, human focused dataset. That earlier effort, called PDDEIMS, recorded its findings by hand, a person reviewing a named graph and assigning it a color that marked the graph as worth extracting, needing filtering, or excluding outright. ODIN grew out of the SPARQL editor built inside PDDEIMS for that work. It kept growing once it became its own application, adding a shared log, endpoint comparison, and live schema discovery. A small statistics view now covers both the whole project and any single endpoint a person happens to be working in.
+
+This paper describes what ODIN actually does, and places it against the closest tools found through a deliberate search of published work. It also draws a clear line against YummyData, a monitoring service from the same research community that solves an adjacent but distinct problem. The paper closes by stating plainly what ODIN does not attempt, since a tool is easier to evaluate once its edges are visible.
+
+# Related Work
+
+Several tools solve pieces of what ODIN does, though none combine them the same way.
+
+A 2025 editor from the SIB, built on the widely used YASGUI editor, retrieves lightweight metadata from an endpoint at load time. It uses that metadata for autocomplete and for rendering example queries the endpoint publishes through SHACL. This matches ODIN's own habit of asking an endpoint directly what it contains, rather than trusting a separate document about it. The SIB editor works for one person at a time though, with no shared record of anyone's queries.
+
+YASGUI itself, maintained by Triply, offers a workspace concept, a shared and versioned store of queries a team has chosen to keep, often linked to a Git repository. That is closer to a shared library than to an activity log. It tells a team which queries it decided were worth saving, not what anyone actually tried today or what a colleague thought about a particular result.
+
+SPARQL Visualizer, presented at an earlier 2018 workshop specifically on linked data in construction, aimed at a related but distinct gap. It helped domain experts, developers, and ontology engineers communicate with each other during ontology design by sharing sample queries, data, and descriptions. Its goal resembles ODIN's shared log more closely than either of the tools above. It was built around discrete artifacts shared between phases of a design process though, not a continuously updated record of daily querying.
+
+YummyData, from DBCLS, solves a different problem altogether. Life science datasets are frequently published through more than one provider, and a researcher often has no easy way to know which copy of a dataset to trust. YummyData answers that by crawling roughly sixty biomedical endpoints daily and scoring each one across six dimensions, availability, freshness, operation, usefulness, validity, and performance, with years of history behind every score. ODIN's own health check and per endpoint statistics do something narrower. They confirm an endpoint a team has already chosen is reachable right now and report roughly what it currently holds, without attempting the historical trend analysis that YummyData was built around.
+
+None of these tools, taken individually, keep what ODIN keeps at its center, a log where every query any team member runs becomes visible to the rest of the team. Comment threads attach to individual runs there, which none of the tools above offer either. This particular search was not exhaustive by any means. Something closer to ODIN may still exist outside what a handful of queries against published literature could ever surface.
+
+# Design and Implementation
+
+ODIN follows the same architectural instinct as PDDEIMS, the project it descended from. Every user account, endpoint definition, comment, and cached schema result lives in an ordinary file on disk, read when needed and rewritten in full when something changes. A single Python program, built on the language's own standard library, serves the whole application, with no web framework and no database underneath it. This choice keeps the entire state of the application readable and copyable by anyone with basic tools, without requiring familiarity with a query language first.
+
+A person picks an endpoint from a curated catalog spanning more than a hundred sources, across domains including life sciences, cultural heritage, and geography. A query can run against one endpoint alone or against as many as three at once, with each response shown in its own pane. Every run, regardless of who made it, is recorded in a shared log searchable by endpoint, outcome, or free text. Any entry there can carry threaded comments, labels, and a personal star visible only to the person who set it.
+
+Because no registry reliably describes what classes and predicates a given endpoint contains, ODIN asks the endpoint directly, sending one query for distinct classes and another for distinct predicates. The result is cached so the same question is not repeated unnecessarily. From whatever it finds, ODIN builds a small set of runnable example queries a person can use with one click. A separate view reports live statistics for the whole project, endpoint counts, query volume, comment activity. It reports the same kind of thing again for whichever single endpoint a person happens to be working in, triple counts, class and predicate counts, and named graph counts. All of it is pulled fresh on each request rather than stored and aged.
+
+# Discussion
+
+Read together, the comparisons in this paper suggest ODIN addresses a small set of separate problems rather than one large one.
+
+A team investigating a shared endpoint has no default record of its own work. Most query tools keep a private history visible only to whoever typed the query, and ODIN's shared log exists specifically to close that gap.
+
+No registry reliably describes what an endpoint actually contains, so ODIN asks the endpoint itself and builds examples from what it finds. That is the same instinct behind the SIB's own lightweight metadata approach, extended here into a shared, comment bearing record.
+
+A team that has already selected its endpoints still needs a fast read on whether one is currently reachable and roughly how large it is. YummyData answers a broader version of this question for endpoints nobody has chosen yet. ODIN answers a narrower one for endpoints a team is already committed to.
+
+Two related sources sometimes disagree, and that disagreement is easy to miss reading one answer at a time. Placing both results side by side, ODIN's comparison view, makes the disagreement visible without extra effort.
+
+Not every person who can access ODIN should see every other person's account details, even though every person should see every query anyone has run. That particular asymmetry, shared activity paired with scoped identity, did not surface in any of the related tools reviewed here.
+
+# Limitations
+
+This paper's comparison against related work rests on a search of published tools and two adjacent projects, not a systematic survey. It is possible a tool closer to ODIN exists and was not found. ODIN's own statistics are also worth qualifying. Unlike YummyData, they are computed live and discarded once viewed, so ODIN cannot currently support the kind of trend analysis YummyData's persisted history enables. Finally, ODIN's catalog assumes endpoints have already been chosen and curated by the team using it. It offers no mechanism for discovering or ranking endpoints outside that catalog, and was not built to.
 
 INSERT LABELED SCREENSHOT HERE
 
