@@ -1,6 +1,6 @@
 ---
-title: 'DBCLS BioHackathon 2026 report: Template for the very long title'
-title_short: 'BioHackJP26: How we found breakfast'
+title: 'Agent-assisted RDF extraction, semantic serving, and governed access for HGA'
+title_short: 'BioHackJP26: RDF extraction and conformance'
 tags:
   - Semantic web
   - Ontologies
