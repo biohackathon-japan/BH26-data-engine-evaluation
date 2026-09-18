@@ -36,7 +36,12 @@ authors_short: First Author \emph{et al.}
 
 # Introduction
 
-As part of the DBCLS BioHackathon 2026, we here report... ladidea
+As part of the DBCLS BioHackathon 2026, we here report our efforts to develop tools and workflows to extract target data from a triple store with complex schema structures. INSERT DESCRIPTION OF GLYCOSMOS PORTAL. INSERT LARGE SCALE GOAL FO CREATED A HUMAN SPECIFIC GLYCOBIOLOGY DATA SOURCE. To this end, our group wanted to take 
+
+LLMs can process complexity in a highly organized triple system (even if that system is complex) faster and more accurately than a non-expert user of that same system. Recognizing the advantages of this quality can improve efficiency of data transfer and management between users and institutions. To that end, we developed a workflow for agent-assisted data extraction and a companion SPARQL endpoint tool with extended capabilities to facilitate cooperative work between subject matter experts to improve the supervision and validation of that agentic pipeline.
+
+
+INSERT STUFF ABOUT HOW THIS LEADS INTO ENGINE DEVELOPMENT
 
 ## Meeting information
 
