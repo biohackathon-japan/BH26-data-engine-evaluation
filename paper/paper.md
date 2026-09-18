@@ -3,8 +3,13 @@ title: 'Agent-assisted RDF extraction, semantic serving, and governed access for
 title_short: 'BioHackJP26: RDF extraction and conformance'
 tags:
   - Semantic web
-  - Ontologies
-  - Workflows
+  - RDF
+  - SPARQL
+  - Knowledge graphs
+  - Data integration
+  - Large language models
+  - Access control
+  - Glycoinformatics
 authors:
   - name: Miguel Mazumder
     affiliation: 1
