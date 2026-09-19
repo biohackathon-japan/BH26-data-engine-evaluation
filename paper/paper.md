@@ -296,7 +296,7 @@ Once the subject matter confirms that the agent has an accurate representation o
 
 **Step Three: split queries that cause timeout errors** Performance is checked by the agent while a query is still being drafted, and splits into separate queries if necessary. The split is kept permanently in the document once drafted. This is out of abundance of caution, and is a decision point to address if significant changes are made to the database that make the split unnecessary, or require a split along a different retrieval pattern. 
 
-**Step Four: retain pointer URI discipline** Object URIs that were previously identified as the end of an extraction pattern, aka a "pointer URI", are confirmed and the restriction discipline that was established in that dataset's own `tohsa_step3_predicate_discovery.md` is maintained.
+**Step Four: retain pointer URI discipline** Object URIs whose expansion created a fan out risk are confirmed, and the scope of the extraction is restricted to end at the final URI connected to this risky predicate, aka a "pointer URI". The restriction discipline that was established in the dataset's own `tohsa_step3_predicate_discovery.md` that identified the pointer URIs is maintained.
 
 **Step Five: perform deep cross check** Before the `CONSTRUCT` query document is published for an expert's independent review, a full adversarial pass over all drafted queries for the dataset of interest is run after the rest of the document otherwise looks complete. Every check is live against the endpoint, not inferred from the previous query text.
 
