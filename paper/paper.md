@@ -343,7 +343,7 @@ Further work is required to bind authorization to a specific release and serving
 
 Because some TOHSA data may be restricted, we also evaluated stronger physical isolation as a complement to query-time authorization. A prototype used immutable release artifacts and separate serving targets to test release identity, reconstruction of a serving target, rejection of release mismatches, and separation of public and protected data.
 
-This prototype demonstrated that physical separation can provide an additional containment boundary, but it did not establish the final deployment topology. The current architecture can operate with public and protected data in one knowledge graph under separate access paths, while retaining the option to move to separate public and protected serving targets in the future. Such a change would strengthen isolation without requiring the underlying authorization model to be redesigned.
+This prototype demonstrated that physical separation can provide an additional containment boundary, but it did not establish the final deployment topology. The resulting architecture supports public and protected data in one knowledge graph under separate access paths, while retaining the option to move to separate public and protected serving targets in the future.
 
 The prototype also reinforced the distinction between scientific data and user permissions. A release identifies the data being served, while authorization determines which portions of that release a user may query. Multiple users can therefore receive different access to the same scientific release without creating a separate release for each user.
 
